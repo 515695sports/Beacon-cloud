@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +16,8 @@ public class CacheController {
 
     @Autowired
     private RedisClient redisClient;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     //存储hash结构
     @PostMapping(value = "/cache/hmset/{key}")
@@ -170,4 +173,11 @@ public class CacheController {
         return result;
     }
 
+    @PostMapping("/cache/keys/{pattern}")
+    public Set<String> keys(@PathVariable String pattern){
+        log.info("【缓存模块】 keys方法，根据pattern查询key的信息,pattern={}",pattern);
+        Set<String> keys = redisTemplate.keys(pattern);
+        log.info("【缓存模块】 keys方法，根据pattern查询key的信息,pattern={},查询出全部的key信息,keys={}",pattern,keys);
+        return keys;
+    }
 }

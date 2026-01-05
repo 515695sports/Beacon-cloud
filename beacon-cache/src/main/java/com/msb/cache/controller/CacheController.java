@@ -173,6 +173,11 @@ public class CacheController {
         return result;
     }
 
+    /**
+     * 根据pattern查询符合条件的所有key并返回
+     * @param pattern 匹配前缀
+     * @return set<String>
+     */
     @PostMapping("/cache/keys/{pattern}")
     public Set<String> keys(@PathVariable String pattern){
         log.info("【缓存模块】 keys方法，根据pattern查询key的信息,pattern={}",pattern);

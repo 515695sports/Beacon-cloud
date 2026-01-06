@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+<!--    <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+    <!--所有信息都在context里,id是唯一标识,targetRuntime是在MyBatis3的环境-->
+    <context id="beaconCloud" targetRuntime="MyBatis3">
+        <!--去掉注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.238.128:3307/beacon_cloud?useSSL=false&amp;characterEncoding=utf-8&amp;useUnicode=true&amp;serverTimezone=Asia/Shanghai"
+                        userId="root"
+                        password="ZhaoXinYu123!">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <!--是否将decimal类型转换为java中的BigDecimal-->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!--生成表对应的实体类-->
+        <javaModelGenerator targetPackage="com.msb.webmaster.entity" targetProject="src/main/java">
+            <!--字符串去掉两边空格-->
+            <property name="trimStrings" value="true" />
+            <property name="enableSubPackages" value="true" />
+        </javaModelGenerator>
+        <!--生成xml文件-->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
+            <!--是否根据数据库名自动创建子包-->
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        <!--生成mapper接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.msb.webmaster.mapper"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!--指定表和对应的实体类等信息-->
+        <!--<table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>-->
+        <table tableName="sms_user" domainObjectName="SmsUser"/>
+        <table tableName="sms_role" domainObjectName="SmsRole"/>
+        <table tableName="sms_menu" domainObjectName="SmsMenu"/>
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,20 @@
+#shiro配置
+shiro:
+  #默认登录页面
+  loginUrl: /login.html
+  #没有权限的页面
+  unauthorizedUrl: unauthorized.html
+#datasource配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.238.128:3307/beacon_cloud?useSSL=false&characterEncoding=utf-8&useUnicode=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: ZhaoXinYu123!
+    type: com.alibaba.druid.pool.DruidDataSource #指定druid连接池
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  #驼峰映射
+  configuration:
+    map-underscore-to-camel-case: true
